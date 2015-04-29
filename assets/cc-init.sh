@@ -26,8 +26,8 @@ function proc_postfix_basic () {
 
 function add_accounts () {
   echo $users | tr , \\n > /var/tmp/users
-  while IFS=':' read -r _user _id _pwd; do
-    useradd -u $_id -s /usr/sbin/nologin $_user
+  while IFS=':' read -r _user _pwd; do
+    useradd -s /usr/sbin/nologin $_user
     echo -e "${_pwd}\n${_pwd}" | passwd $_user
   done < /var/tmp/users
   rm /var/tmp/users
@@ -82,6 +82,15 @@ function proc_spamassassin () {
 }
 
 
+###############
+### DOVECOT ###
+###############
+
+function config_dovecot () {
+  sed -i -e "s/^#disable_plaintext_auth\s*=\s*yes/disable_plaintext_auth = no/" /etc/dovecot/conf.d/10-auth.conf
+}
+
+
 ##################
 ### SUPERVISOR ###
 ##################
@@ -97,6 +106,9 @@ command=/opt/cc-spamassassin.sh
 
 [program:postfix]
 command=/opt/cc-postfix.sh
+
+[program:dovecot]
+command=/opt/cc-dovecot.sh
 
 [program:rsyslog]
 command=/usr/sbin/rsyslogd -n -c3
@@ -117,11 +129,20 @@ tail -F /var/log/mail.log
 EOF
 
   chmod +x /opt/cc-postfix.sh
+
+  cat >> /opt/cc-dovecot.sh <<EOF
+#!/bin/bash
+/etc/init.d/dovecot start
+#tail -f /var/log/mail.log
+EOF
+
+  chmod +x /opt/cc-dovecot.sh
 }
 
 
 proc_postfix
 proc_spamassassin
+config_dovecot
 proc_supervisor
 
 # /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
