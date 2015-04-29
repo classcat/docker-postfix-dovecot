@@ -27,7 +27,9 @@ function proc_postfix_basic () {
 function add_accounts () {
   echo $users | tr , \\n > /var/tmp/users
   while IFS=':' read -r _user _pwd; do
-    useradd -s /usr/sbin/nologin $_user
+    # -m required for dovecot.
+    useradd -s /usr/sbin/nologin -m $_user
+    # useradd -s /usr/sbin/nologin $_user
     echo -e "${_pwd}\n${_pwd}" | passwd $_user
   done < /var/tmp/users
   rm /var/tmp/users
