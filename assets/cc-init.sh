@@ -133,7 +133,7 @@ EOF
   cat >> /opt/cc-dovecot.sh <<EOF
 #!/bin/bash
 /etc/init.d/dovecot start
-#tail -f /var/log/mail.log
+tail -F /var/log/mail.err
 EOF
 
   chmod +x /opt/cc-dovecot.sh
