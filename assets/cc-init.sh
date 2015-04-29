@@ -1,11 +1,11 @@
 #!/bin/bash
 
 ########################################################################
-# ClassCat/Postfix Asset files
+# ClassCat/Postfix-Dovecot Asset files
 # maintainer: Masashi Okumura < masao@classcat.com >
 ########################################################################
 
-## last modified : 29-apr-15 ##
+## last modified : 30-apr-15 ##
 
 ###############
 ### POSTFIX ###
@@ -46,7 +46,7 @@ mech_list: PLAIN LOGIN CRAM-MD5 DIGEST-MD5 NTLM
 EOF
 
   echo $users | tr , \\n > /var/tmp/users
-  while IFS=':' read -r _user _id _pwd; do
+  while IFS=':' read -r _user _pwd; do
     echo $_pwd | saslpasswd2 -p -c -u $domainname $_user
   done < /var/tmp/users
   rm /var/tmp/users
