@@ -9,7 +9,7 @@ and run dovecot pop/imap server in a container.
 
 ## Usage
 
-    $ sudo docker run -it --name (container name) \  
+    $ sudo docker run -d --name (container name) \  
     -p 25:25 -p 587:587 -p 110:110 -p 143:143 \  
     -v (dir on host):/var/mail \  
     -e hostname=(FQDN of host) -e domainname=(domain name) \  
@@ -18,7 +18,7 @@ and run dovecot pop/imap server in a container.
 
 ### example)  
 
-    $ sudo docker run -it --name postfix-dovecot \  
+    $ sudo docker run -d --name postfix-dovecot \  
     -p 25:25 -p 587:587 -p 110:110 -p 143:143 \  
     -v /mail:/var/mail \  
     -e hostname=mailsvr.classcat.com -e domainname=classcat.com \  
