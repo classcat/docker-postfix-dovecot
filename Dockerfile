@@ -1,5 +1,5 @@
 FROM ubuntu:trusty
-#FROM ubuntu:14.04.2
+#FROM ubuntu:14.04
 MAINTAINER Masashi Okumura <masao@classcat.com>
 
 ENV DEBIAN_FRONTEND noninteractive
