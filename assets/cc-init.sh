@@ -5,7 +5,10 @@
 # maintainer: Masashi Okumura < masao@classcat.com >
 ########################################################################
 
-## last modified : 30-apr-15 ##
+### HISTORY ###
+# 03-may-15 : Removed the nodaemon steps.
+#
+
 
 ###############
 ### POSTFIX ###
@@ -100,9 +103,6 @@ function config_dovecot () {
 
 function proc_supervisor () {
   cat > /etc/supervisor/conf.d/supervisord.conf <<EOF
-[supervisord]
-nodaemon=true
-
 [program:spamassassin]
 command=/opt/cc-spamassassin.sh
 
