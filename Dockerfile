@@ -18,6 +18,6 @@ ADD assets/local.cf /etc/spamassassin/local.cf
 
 ADD assets/dovecot /etc/init.d/dovecot
 
-EXPOSE 25 587 110 143
+EXPOSE 22 25 587 110 143
 
 CMD /opt/cc-init.sh; /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
