@@ -6,8 +6,19 @@
 ########################################################################
 
 ### HISTORY ###
+# 04-may-15 : Add sshd and code portion to handle root password.
 # 03-may-15 : Removed the nodaemon steps.
 #
+
+
+############
+### SSHD ###
+############
+
+function change_root_password() {
+  echo -e "root:${password}" | chpasswd
+  # echo -e "${password}\n${password}" | passwd root
+}
 
 
 ###############
@@ -112,6 +123,9 @@ command=/opt/cc-postfix.sh
 [program:dovecot]
 command=/opt/cc-dovecot.sh
 
+[program:ssh]
+command=/usr/sbin/sshd -D
+
 [program:rsyslog]
 command=/usr/sbin/rsyslogd -n -c3
 EOF
@@ -142,6 +156,7 @@ EOF
 }
 
 
+change_root_password
 proc_postfix
 proc_spamassassin
 config_dovecot
