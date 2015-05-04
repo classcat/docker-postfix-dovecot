@@ -1,4 +1,4 @@
-FROM classcat/ubuntu-supervisord:trusty
+FROM classcat/ubuntu-supervisord:vivid
 MAINTAINER Masashi Okumura <masao@classcat.com>
 
 ENV DEBIAN_FRONTEND noninteractive
