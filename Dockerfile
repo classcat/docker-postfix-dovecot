@@ -1,5 +1,14 @@
-FROM classcat/ubuntu-supervisord:trusty
-MAINTAINER Masashi Okumura <masao@classcat.com>
+FROM classcat/ubuntu-supervisord2:trusty
+MAINTAINER ClassCat Co.,Ltd. <support@classcat.com>
+
+########################################################################
+# ClassCat/Postfix Dockerfile
+#   Maintained by ClassCat Co.,Ltd ( http://www.classcat.com/ )
+########################################################################
+
+#--- HISTORY -----------------------------------------------------------
+# 06-may-15 : fixed.
+#-----------------------------------------------------------------------
 
 ENV DEBIAN_FRONTEND noninteractive
 
