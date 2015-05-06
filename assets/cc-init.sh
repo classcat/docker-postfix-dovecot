@@ -91,7 +91,7 @@ EOF
 
   echo ${USERS} | tr , \\n > /var/tmp/users
   while IFS=':' read -r _user _pwd; do
-    echo $_pwd | saslpasswd2 -p -c -u $domainname $_user
+    echo $_pwd | saslpasswd2 -p -c -u ${DOMAINNAME} $_user
   done < /var/tmp/users
   rm /var/tmp/users
 
